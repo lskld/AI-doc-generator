@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Delete Environment Variables Files
+**/Properties/launchSettings.json
+appsettings.Development.json
+appsettings.Local.json
+.env
