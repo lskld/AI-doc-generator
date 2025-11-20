@@ -27,7 +27,12 @@ namespace AI_doc_generator
             var allCode = string.Join("\n\n", contents.Where(
                 c => c.Type == ContentType.File).Select(
                 c => $"// {c.Path}\n{c.Content}"));
-            var prompt = $"Here is my code: {allCode}. \n\n Please write a 'Software Requirements Specification' based on this code using the MIL-STD-498 standard.";
+            var promptSRS = $"Here is my code: {allCode}. \n\n Please write a 'Software Requirements Specification (SRS)' based on this code using the MIL-STD-498 standard.";
+            var promptSTD = $"Here is my code: {allCode}. \n\n Please write a 'Software Test Description (STD)' based on this code using the MIL-STD-498 standard.";
+            var promptSTR = $"Here is my code: {allCode}. \n\n Please write a 'Software Test Report (STR)' based on this code using the MIL-STD-498 standard.";
+            var promptSVD = $"Here is my code: {allCode}. \n\n Please write a 'Software Version Description (SVD)' based on this code using the MIL-STD-498 standard.";
+
+            var chosenPrompt = promptSRS; //Changed to integration with frontend later
 
             //Gemini Developer API
             string geminiApiKey = Environment.GetEnvironmentVariable("GEMINI_API_KEY")
@@ -35,7 +40,7 @@ namespace AI_doc_generator
             var googleAiClient = new Client(apiKey: geminiApiKey);
 
             var response = await googleAiClient.Models.GenerateContentAsync(
-              model: "gemini-2.5-flash", contents: prompt
+              model: "gemini-2.5-flash", contents: chosenPrompt
             );
             var outputMessage = response.Candidates[0].Content.Parts[0].Text;
 
