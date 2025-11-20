@@ -4,9 +4,21 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+    --animate-aurora: aurora 60s linear infinite;
+  @keyframes aurora {
+    from {
+      background-position:
+        50% 50%,
+        50% 50%;
+    }
+    to {
+      background-position:
+        350% 50%,
+        350% 50%;
+    }
+  }
     --animate-cell-ripple: cell-ripple var(--duration, 200ms) ease-out none 1
   var(--delay, 0ms);
- 
   @keyframes cell-ripple {
     0% {
       opacity: 0.4;
