@@ -3,8 +3,21 @@ import { signIn } from "next-auth/react";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { motion } from "motion/react";
 import { IconBrandGithub } from "@tabler/icons-react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
+
+  const handleSignIn = async () => {
+    const result = await signIn("github", {
+      redirect: false,
+      callbackUrl: "/generation"
+    });
+    if (result?.ok) {
+      router.push("/generation");
+    }
+  };
+
   return (
     <div className="min-h-screen w-full bg-zinc-50 font-sans dark:bg-black">
       <AuroraBackground>
@@ -27,7 +40,7 @@ export default function Home() {
             </div>
             <button
               className="bg-black dark:bg-white rounded-full w-fit text-white dark:text-black px-4 py-2 flex flex-row items-center gap-2 hover:scale-105 transition-transform"
-              onClick={() => signIn("github")}
+              onClick={handleSignIn}
             >
               <IconBrandGithub />
               Sign in with GitHub
