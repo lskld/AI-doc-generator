@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <div className="min-h-screen w-full bg-zinc-50 font-sans dark:bg-black">
       <AuroraBackground>
-        <main className="flex flex-col items-center justify-center min-h-screen w-full max-w-3xl mx-auto dark:bg-black sm:items-start">
+        <main className="flex flex-col items-center justify-center min-h-screen w-full max-w-3xl mx-auto sm:items-start">
           <motion.div
             initial={{ opacity: 0.0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
